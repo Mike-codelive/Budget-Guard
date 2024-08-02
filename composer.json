@@ -1,0 +1,12 @@
+{
+  "name": "mike/manager",
+  "description": "application for tracking expences",
+  "type": "project",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "src/Framework",
+      "App\\": "src/App"
+    }
+  }
+}
