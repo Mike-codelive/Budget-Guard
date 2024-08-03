@@ -8,21 +8,16 @@ class Router
 {
   private array $routes = [];
 
-  public function add(string $method, string $path)
+  public function add(string $method, string $path, array $controller)
   {
 
-      $path = $this->normalizePath($path);
+    $path = $this->normalizePath($path);
     $this->routes[] = [
         'path' => $path,
-          'method' => strtoupper($method)
+        'method' => strtoupper($method),
+        'controller' => $controller
     ];
 
-
-    // $this->routes[] = [ 
-    //   'path' => $path,
-    //   'method' => strtoupper($method),
-    //   'controller' => $controller
-    // ];
   }
 
   private function normalizePath(string $path): string
@@ -39,6 +34,7 @@ class Router
     $path = $this->normalizePath($path);
     $method = strtoupper($method);
 
+    // echo $path . $method;
     foreach ($this->routes as $route) {
       if (
         !preg_match("#^{$route['path']}$#", $path) ||
@@ -47,6 +43,7 @@ class Router
         continue;
       }
 
+    //   echo 'Route Found';
       [$class, $function] = $route['controller'];
 
       $controllerInstance = new $class;
